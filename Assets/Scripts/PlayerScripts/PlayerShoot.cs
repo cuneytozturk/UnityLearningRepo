@@ -22,7 +22,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inputManager.OnFootActions.Shoot.triggered) {
+        if (inputManager.PlayerInput.OnFoot.Shoot.triggered) {
             shootInput?.Invoke();
         }
     }

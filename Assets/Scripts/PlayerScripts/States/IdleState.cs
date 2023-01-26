@@ -11,19 +11,19 @@ internal class IdleState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (_ctx.IsMovementPressed && _ctx.IsRunPressed)
+        if (Ctx.IsMovementPressed && Ctx.IsRunPressed)
         {
-            SwitchState(_factory.Walking());
-        }else if(_ctx.IsMovementPressed)
+            SwitchState(Factory.Running());
+        }else if(Ctx.IsMovementPressed)
         {
-            SwitchState(_factory.Running());
+            SwitchState(Factory.Walking());
         }
     }
 
     public override void Enter()
     {
-        _ctx.Animator.SetBool(_ctx.IsWalkingHash, false);
-        _ctx.Animator.SetBool(_ctx.IsRunningHash, false);
+        Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
+        Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
 
     }
 
@@ -31,11 +31,13 @@ internal class IdleState : PlayerBaseState
     {
     }
 
+    public override void InitializeSubState()
+    {
+    }
+
     public override void Perform()
     {
-        moveDirection.x = _ctx.MovementInput.x;
-        moveDirection.z = _ctx.MovementInput.y;
-        _ctx.IsMovementPressed = moveDirection.x != 0 || moveDirection.z != 0;
+        
         CheckSwitchState();
     }
 }

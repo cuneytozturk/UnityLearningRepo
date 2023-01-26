@@ -16,5 +16,8 @@ public class PlayerStateMachineFactory {
     
     public PlayerBaseState Running() { return new RunningState(_context, this); }
 
+    public PlayerBaseState Jumping() { return new JumpingState(_context, this); }
+
+    public PlayerBaseState Grounded() { return new GroundedState(_context, this); }
 
 }

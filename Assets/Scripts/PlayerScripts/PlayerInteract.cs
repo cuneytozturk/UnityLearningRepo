@@ -10,13 +10,13 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField]
     private LayerMask mask;
     private PlayerUI playerUI;
-    private PlayerStateMachine playerInput;
+    private InputManage inputManager;
     
     void Start()
     {
         playerUI = GetComponent<PlayerUI>();
         cam = GetComponent<PlayerLook>().cam;
-        playerInput = GetComponent<PlayerStateMachine>();
+        inputManager = GetComponent<InputManage>();
     }
 
     
@@ -35,9 +35,9 @@ public class PlayerInteract : MonoBehaviour
             if(hitInfo.collider.GetComponent<Interactable>() != null){
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                 playerUI.UpdateText(interactable.promptMessage);
-                
+
                 //if player presses interact prompt
-                if(playerInput.OnFootActions.Interact.triggered){
+                if (inputManager.IsInteractPressed){
                     interactable.BaseInteract();
                  }
             }

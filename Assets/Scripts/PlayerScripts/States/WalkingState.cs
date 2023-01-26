@@ -10,23 +10,27 @@ public class WalkingState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (_ctx.IsRunPressed)
+        if (Ctx.IsRunPressed)
         {
-            SwitchState(_factory.Running());
+            SwitchState(Factory.Running());
         }
-        else if (!_ctx.IsMovementPressed) {
-        SwitchState(_factory.Idle());
+        else if (!Ctx.IsMovementPressed) {
+        SwitchState(Factory.Idle());
         }
     }
 
     public override void Enter()
     {
     
-        _ctx.Animator.SetBool(_ctx.IsWalkingHash, true);
-        _ctx.Animator.SetBool(_ctx.IsRunningHash, false);
+        Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
+        Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
     }
 
     public override void Exit()
+    {
+    }
+
+    public override void InitializeSubState()
     {
     }
 
@@ -38,19 +42,11 @@ public class WalkingState : PlayerBaseState
 
     public void ProcessMove()
     {
-        _ctx.IsMovementPressed = _ctx.AppliedMovementX != 0 || _ctx.AppliedMovementZ != 0;
-        _ctx.AppliedMovementX = _ctx.MovementInput.x;
-        _ctx.AppliedMovementZ = _ctx.MovementInput.y;
 
-        _ctx.Controller.Move(_ctx.MoveDirection * _ctx.Speed * Time.deltaTime);
+        //Ctx.currentMovement.x =  Ctx.Speed * Time.deltaTime;
+        //Ctx.currentMovement.z =  Ctx.Speed * Time.deltaTime;
 
+        //Ctx.currentMovement = Ctx.MoveDirection * Ctx.Speed * Time.deltaTime;
 
-        if (_ctx.PlayerVelocityY < 0)
-        {
-            _ctx.PlayerVelocityY = -2f;
-        }
-
-        _ctx.PlayerVelocityY += _ctx.Gravity * Time.deltaTime;
-        _ctx.Controller.Move(_ctx.PlayerVelocity * Time.deltaTime);
     }
 }
